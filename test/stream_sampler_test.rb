@@ -22,6 +22,18 @@ class StreamSamplerTest < ActiveSupport::TestCase
     result = StreamSampler.reservoir_sample(items, 10)
     assert_equal 10, result.length
   end
+  
+  test "reservoir_sample selects correctly from a two-element set" do
+    seen = []
+    
+    100.times do |i|
+      result = StreamSampler.reservoir_sample([1,2], 1)
+      seen << result
+      break if seen.length == 2
+    end
+
+    assert_equal 2, seen.length
+  end
 end
 
 class ActsAsSamplableTest < ActiveSupport::TestCase

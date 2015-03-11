@@ -18,7 +18,7 @@ module StreamSampler
       if idx < n
         out << i
       else
-        j = rand(idx)
+        j = rand(idx + 1) 
         out[j] = i if j < n
       end
     end
